@@ -40,7 +40,7 @@ reponse = st.text_input("Votre réponse (en majuscules) :")
 
 if reponse:
     if reponse.upper() == st.session_state.choisir_mots:
-        st.success("Bravo, c'est correct !")
+        st.success("aller sur le site : https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal")
     st.session_state.can_proceed = True
 else:
     st.error("Mauvaise réponse. Essayez encore !")
