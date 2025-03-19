@@ -28,21 +28,21 @@ choisir_mots = st.session_state["mot_a_deviner"]
 mots_en_morse = texte_to_morse(choisir_mots)
 
 # Initialiser la variable d'état pour la progression
-
 if 'can_proceed' not in st.session_state:
     st.session_state.can_proceed = False
 
 st.write(f"Mot à déchiffrer : {mots_en_morse}")
-st.write("Attention, il change à chaque mauvaise réponse !")
+st.write("Trouvez le mot correspondant au code morse ci-dessus !")
 
 # Entrée utilisateur
 reponse = st.text_input("Votre réponse (en majuscules) :")
 
 if reponse:
-    if reponse.upper() == st.session_state.choisir_mots:
-        st.success("aller sur le site : https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal")
-    st.session_state.can_proceed = True
-else:
-    st.error("Mauvaise réponse. Essayez encore !")
-    st.session_state.can_proceed = False
-
+    if reponse.upper() == st.session_state["mot_a_deviner"]:
+        st.success("Bravo ! Vous avez trouvé le mot. Allez sur ce site : https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal")
+        st.session_state.can_proceed = True
+    else:
+        st.error("Mauvaise réponse. Essayez encore !")
+        # Génère un nouveau mot à deviner
+        st.session_state["mot_a_deviner"] = random.choice(mots)
+        st.session_state.can_proceed = False
